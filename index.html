@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI List Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>  FastAPI List Manager</h1>
+
+    <button onclick="fetchData()"> Get List</button>
+    <button onclick="sortList()"> Sort List (POST)</button>
+    <button onclick="appendToList()"> Append -1 (PUT)</button>
+    <button onclick="deleteItem()"> Delete 2 (DELETE)</button>
+
+    <div id="response">Response will appear here...</div>
+
+    <script>
+        const API_BASE = "http://127.0.0.1:8000";
+
+        async function fetchData() {
+            const res = await fetch(`${API_BASE}/listdata`);
+            const text = await res.text();
+            document.getElementById("response").innerText = text;
+        }
+
+        async function sortList() {
+            const res = await fetch(`${API_BASE}/post`, {
+                method: "POST"
+            });
+            const text = await res.text();
+            document.getElementById("response").innerText = text;
+        }
+
+        async function appendToList() {
+            const res = await fetch(`${API_BASE}/put`, {
+                method: "PUT"
+            });
+            const text = await res.text();
+            document.getElementById("response").innerText = text;
+        }
+
+        async function deleteItem() {
+            const res = await fetch(`${API_BASE}/Delete`, {
+                method: "DELETE"
+            });
+            const text = await res.text();
+            document.getElementById("response").innerText = text;
+        }
+    </script>
+
+</body>
+</html>
